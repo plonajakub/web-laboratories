@@ -2,45 +2,33 @@ body {
     background-color: hsl(0, 0%, 50%);
 }
 
-.post {
-    background-color: darkgray;
-    border: darkred solid 3px;
-    margin-top: 20px;
-    margin-right: 5px;
-    margin-left: 20px;
-    margin-bottom: 20px;
-    padding: 10px;
-}
-
 aside {
-    background-color: darkgrey;
-    border: darkcyan groove 1px;
-    margin-top: 20px;
-    margin-right: 20px;
-    margin-left: 5px;
-    margin-bottom: 20px;
-    padding: 10px;
-}
-
-.trackel {
-    background-color: darkgrey;
-    border: none;
-    color: antiquewhite;
-    margin: 20px;
-    padding: 10px;
-}
-
-.welcome {
-    background-color: darkgrey;
-    margin-top: 20px;
-    margin-right: 20px;
-    margin-left: 20px;
-    margin-bottom: 10px;
+    background: darkgrey;
+    border: darkred solid 3px;
+    margin: 20px 20px 20px 5px;
     padding: 10px;
 }
 
 iframe {
     border: none;
+}
+
+.box {
+    background-color: darkgray;
+    border: none;
+    margin: 20px;
+    padding: 20px;
+}
+
+.post {
+    border: black groove 2px;
+    margin: 20px 5px 20px 20px;
+    padding: 20px;
+}
+
+.welcome {
+    margin: 20px 20px 10px 20px;
+    padding: 10px;
 }
 
 .fa {
@@ -50,14 +38,12 @@ iframe {
     min-width: 30px;
 }
 
-/* Facebook */
 .fa-facebook {
-    background: #3B5998;
+    background-color: #3B5998;
     color: white;
 }
 
-/* Twitter */
 .fa-twitter {
-    background: #55ACEE;
+    background-color: #55ACEE;
     color: white;
 }
