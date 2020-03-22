@@ -31,6 +31,13 @@ iframe {
     padding: 10px;
 }
 
+.infoBox {
+    background-color: lightgray;
+    text-align: center;
+    margin: 20px;
+    padding: 20px;
+}
+
 .fa {
     text-align: center;
     text-decoration: none;
