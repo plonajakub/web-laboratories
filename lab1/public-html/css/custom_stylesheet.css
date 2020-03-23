@@ -2,13 +2,6 @@ body {
     background-color: hsl(0, 0%, 50%);
 }
 
-aside {
-    background-color: darkgrey;
-    border: darkred solid 3px;
-    margin: 20px 20px 20px 5px;
-    padding: 20px;
-}
-
 iframe {
     border: none;
 }
@@ -20,15 +13,18 @@ iframe {
     padding: 20px;
 }
 
+.welcome {
+    margin: 20px 20px 10px 20px;
+}
+
 .post {
     border: black groove 2px;
     margin: 20px 5px 20px 20px;
-    padding: 20px;
 }
 
-.welcome {
-    margin: 20px 20px 10px 20px;
-    padding: 20px;
+.indexInfo {
+    border: darkred solid 3px;
+    margin: 20px 20px 20px 5px;
 }
 
 .infoBox {
