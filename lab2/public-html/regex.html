@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link rel="stylesheet" href="css/regex-stylesheet.css">
+
+    <!-- Import scripts -->
+    <script src="js/regex-script.js"></script>
+
+    <title>1. Wyrażenia regularne</title>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <div class="form-container">
+                <form id="regex-form" name="regexForm" method="post" onsubmit="return validateRegexForm()">
+                    <label for="first-name">Imię:</label><br>
+                    <input id="first-name" type="text" name="firstName" placeholder="Jan"><span
+                        id="first-name-info"
+                        class="check-info"></span><br>
+                    <label for="last-name">Nazwisko:</label><br>
+                    <input id="last-name" type="text" name="lastName" placeholder="Kowalski"><span
+                        id="last-name-info"
+                        class="check-info"></span><br>
+                    <label for="phone-number">Numer telefonu:</label><br>
+                    <input id="phone-number" type="tel" name="phoneNumber" placeholder="+4871233445"><span
+                        id="phone-number-info"
+                        class="check-info"></span><br>
+                    <label for="birth-date">Data urodzenia:</label><br>
+                    <input id="birth-date" type="text" name="birthDate" placeholder="10.12.2020"><span
+                        id="birth-date-info"
+                        class="check-info"></span><br>
+                    <label for="email">Email:</label><br>
+                    <input id="email" type="email" name="email" placeholder="jan.kowalski@gmail.com"><span
+                        id="email-info"
+                        class="check-info"></span><br>
+                    <label for="login">Login:</label><br>
+                    <input id="login" type="text" name="login"><span class="check-info" id="login-info"></span><br>
+                    <label for="password">Hasło:</label><br>
+                    <input id="password" type="password" name="password"><span id="password-info"
+                                                                               class="check-info"></span><br>
+                    <label for="repeat-password">Powtórz hasło:</label><br>
+                    <input id="repeat-password" type="password" name="repeatPassword"><span
+                        id="repeat-password-info"
+                        class="check-info"></span><br>
+                    <br><br>
+                    <input type="submit" value="Zatwierdź"><span id="check-info-summary"></span><br>
+                </form>
+            </div>
+        </div>
+        <div class="col-4"></div>
+    </div>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+</html>
