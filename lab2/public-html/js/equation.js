@@ -1,0 +1,111 @@
+document.getElementById("submit-button").addEventListener("click", function (event) {
+    event.preventDefault();
+    solveEquation();
+});
+
+function solveEquation() {
+    const coefAInput = document.getElementById("coef-a").value;
+    const coefBInput = document.getElementById("coef-b").value;
+    const coefCInput = document.getElementById("coef-c").value;
+
+    const coefAInfo = document.getElementById("coef-a-info");
+    const coefBInfo = document.getElementById("coef-b-info");
+    const coefCInfo = document.getElementById("coef-c-info");
+    const solutionInfo = document.getElementById("solution-info");
+
+    const coefAHolder = document.getElementById("coef-a-holder");
+    const coefBHolder = document.getElementById("coef-b-holder");
+    const coefCHolder = document.getElementById("coef-c-holder");
+
+    const root1Holder = document.getElementById("root-1");
+    const root2Holder = document.getElementById("root-2");
+
+    let isEquationValid = true;
+
+    const coefA = parseFloat(coefAInput);
+    if (isNaN(coefA)) {
+        coefAInfo.innerHTML = "Wprowadź liczbę!";
+        isEquationValid = false;
+    } else if (coefA === 0) {
+        coefAInfo.innerHTML = "Wprowadź niezerową wartość!";
+        isEquationValid = false;
+    } else {
+        coefAInfo.innerHTML = "";
+    }
+
+    const coefB = parseFloat(coefBInput);
+    if (isNaN(coefB)) {
+        coefBInfo.innerHTML = "Wprowadź liczbę!";
+        isEquationValid = false;
+    } else {
+        coefBInfo.innerHTML = "";
+    }
+
+    const coefC = parseFloat(coefCInput);
+    if (isNaN(coefC)) {
+        coefCInfo.innerHTML = "Wprowadź liczbę!";
+        isEquationValid = false;
+    } else {
+        coefCInfo.innerHTML = "";
+    }
+
+
+    if (isEquationValid) {
+        let root1, root2;
+        console.log("A:" + coefA + typeof coefA);
+        console.log("B:" + coefB + typeof coefB);
+        console.log("C:" + coefC + typeof coefC);
+        let delta = Math.pow(coefB, 2) - 4 * coefA * coefC;
+        console.log("D:" + delta + typeof delta);
+        if (delta < 0) {
+            root1 = root2 = "";
+            solutionInfo.innerHTML = "Wynik: brak pierwiastków";
+        } else if (delta === 0) {
+            root1 = -coefB / (2 * coefA);
+            root2 = "";
+            solutionInfo.innerHTML = "Wynik: 1 pierwiastek";
+        } else {
+            root1 = (-coefB - Math.sqrt(delta)) / (2 * coefA);
+            root2 = (-coefB + Math.sqrt(delta)) / (2 * coefA);
+            solutionInfo.innerHTML = "Wynik: 2 pierwiastki";
+        }
+
+
+        if (coefA < 0) {
+            coefAHolder.innerHTML = "(" + coefA.toString() + ")";
+        } else {
+            coefAHolder.innerHTML = coefA.toString();
+        }
+
+        if (coefB < 0) {
+            coefBHolder.innerHTML = "(" + coefB.toString() + ")";
+        } else {
+            coefBHolder.innerHTML = coefB.toString();
+        }
+
+        if (coefC < 0) {
+            coefCHolder.innerHTML = "(" + coefC.toString() + ")";
+        } else {
+            coefCHolder.innerHTML = coefC.toString();
+        }
+
+        if (!root1 instanceof String) {
+            root1Holder.innerHTML = root1.toFixed(2).toString();
+        }
+        if (!root2 instanceof String) {
+            root2Holder.innerHTML = root2.toFixed(2).toString();
+        }
+
+    } else {
+        coefAHolder.innerHTML = "a";
+        coefBHolder.innerHTML = "b";
+        coefCHolder.innerHTML = "c";
+
+        root1Holder.innerHTML = "-";
+        root2Holder.innerHTML = "-";
+
+        solutionInfo.innerHTML = "Wynik: równanie niepoprawne";
+    }
+
+    return false;
+}

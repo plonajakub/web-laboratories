@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link rel="stylesheet" href="css/regex-stylesheet.css">
+    <link rel="stylesheet" href="css/equation.css">
+
+    <!-- Custom javascript -->
+    <script src="js/equation.js"></script>
+
+    <title>2. Formularze i JavaScript</title>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-4">
+            <div class="form-container">
+                <p>Wprowadź współczynniki równania kwadratowego:</p>
+                <form id="equation-form" name="equationForm" action="#" method="post" onsubmit="return false;">
+                    <label for="coef-a">a:</label><br>
+                    <input id="coef-a" type="text" name="coefA"><span
+                        id="coef-a-info"
+                        class="check-info"></span><br>
+                    <label for="coef-b">b:</label><br>
+                    <input id="coef-b" type="text" name="coefB"><span
+                        id="coef-b-info"
+                        class="check-info"></span><br>
+                    <label for="coef-c">c:</label><br>
+                    <input id="coef-c" type="text" name="coefC"><span
+                        id="coef-c-info"
+                        class="check-info"></span><br>
+                    <br><br>
+                </form>
+                <button id="submit-button" type="button" onclick="solveEquation()">Rozwiąż równanie</button><br>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="form-container">
+                <span id="equation-text">Równanie:</span>
+                <span id="coef-a-holder" class="coef-holder">a</span><span
+                    class="equation-element">x<sup>2</sup></span><span class="equation-element">+</span>
+                <span id="coef-b-holder" class="coef-holder">b</span><span class="equation-element">x</span><span
+                    class="equation-element">+</span>
+                <span id="coef-c-holder" class="coef-holder">c</span><span class="equation-element">=</span><span
+                    class="equation-element">0</span>
+                <br><br>
+                <span id="solution-info">Wynik:-</span>
+                <br><br>
+                <span>Pierwiastek x<sub>1</sub>:</span>
+                <output id="root-1" name="root1" for="coefA coefB coefC">-</output>
+                <br><br>
+                <span>Pierwiastek x<sub>2</sub>:</span>
+                <output id="root-2" name="root2" for="coefA coefB coefC">-</output>
+                <br>
+            </div>
+        </div>
+        <div class="col-2"></div>
+    </div>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+</html>
