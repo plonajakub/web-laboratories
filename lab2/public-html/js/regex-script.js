@@ -6,10 +6,10 @@ function validateRegexForm() {
     const namePattern = /^[a-zA-Z]+$/;
     const phoneNumberPattern = /^\+\d{10}$/;
     const dateStructurePattern = /^(.*)\.(.*)\.(.*)$/;
-    const dateDayPattern = /^[1-3][0-9]$|^0?[1-9]$/;
+    const dateDayPattern = /^[1-2][0-9]$|^0?[1-9]$|^3[0-1]$/;
     const dateMonthPattern = /^1[0-2]$|^0?[1-9]$/;
     const dateYearPattern = /^[1-2][0-9]{3}$/;
-    const emailPattern = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+    const emailPattern = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-])+$/;
     const loginPattern = /^[a-z]+$/;
 
     const inputValidMsg = "";
