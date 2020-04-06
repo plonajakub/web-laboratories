@@ -3,7 +3,7 @@ function validateRegexForm() {
     let isFormValid = true;
 
     // RegExp patterns
-    const onlyLettersPattern = /^[a-zA-Z]+$/;
+    const namePattern = /^[a-zA-Z]+$/;
     const phoneNumberPattern = /^\+\d{10}$/;
     const dateStructurePattern = /^(.*)\.(.*)\.(.*)$/;
     const dateDayPattern = /^[1-3][0-9]$|^0?[1-9]$/;
@@ -12,40 +12,39 @@ function validateRegexForm() {
     const emailPattern = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
     const loginPattern = /^[a-z]+$/;
 
+    const inputValidMsg = "";
+
     const firstNameInfoSpan = document.getElementById("first-name-info");
     const firstNameInputValue = form["firstName"].value;
-    if (!onlyLettersPattern.test(firstNameInputValue)) {
-        firstNameInfoSpan.innerHTML = "Tylko litery!";
-        firstNameInfoSpan.style.color = "red";
+    if (!namePattern.test(firstNameInputValue)) {
+        firstNameInfoSpan.innerHTML = "Dozwolone tylko litery!";
         isFormValid = false;
     } else {
-        firstNameInfoSpan.innerHTML = "";
+        firstNameInfoSpan.innerHTML = inputValidMsg;
     }
 
     const lastNameInfoSpan = document.getElementById("last-name-info");
     const lastNameInputValue = form["lastName"].value;
-    if (!onlyLettersPattern.test(lastNameInputValue)) {
-        lastNameInfoSpan.innerHTML = "Tylko litery!";
-        lastNameInfoSpan.style.color = "red";
+    if (!namePattern.test(lastNameInputValue)) {
+        lastNameInfoSpan.innerHTML = "Dozwolone tylko litery!";
         isFormValid = false;
     } else {
-        lastNameInfoSpan.innerHTML = "";
+        lastNameInfoSpan.innerHTML = inputValidMsg;
     }
 
     const phoneNumberInfoSpan = document.getElementById("phone-number-info");
     const phoneNumberInputValue = form["phoneNumber"].value;
     if (!phoneNumberPattern.test(phoneNumberInputValue)) {
         phoneNumberInfoSpan.innerHTML = "Tylko format międzynarodowy!";
-        phoneNumberInfoSpan.style.color = "red";
         isFormValid = false;
     } else {
-        phoneNumberInfoSpan.innerHTML = "";
+        phoneNumberInfoSpan.innerHTML = inputValidMsg;
     }
 
     const birthDateInfoSpan = document.getElementById("birth-date-info");
     const birthDateInputValue = form["birthDate"].value;
     let isDateStructureValid = true;
-    let isDateValid = true;
+    let areDateElementsValid = true;
     let invalidDateElementsInfo = [];
     if (!dateStructurePattern.test(birthDateInputValue)) {
         isDateStructureValid = false;
@@ -53,49 +52,46 @@ function validateRegexForm() {
         let [dayInput, monthInput, yearInput] = birthDateInputValue.split(".");
         if (!dateDayPattern.test(dayInput)) {
             invalidDateElementsInfo.push("dzień");
-            isDateValid = false;
+            areDateElementsValid = false;
         }
         if (!dateMonthPattern.test(monthInput)) {
             invalidDateElementsInfo.push("miesiąc");
-            isDateValid = false;
+            areDateElementsValid = false;
         }
         if (!dateYearPattern.test(yearInput)) {
             invalidDateElementsInfo.push("rok");
-            isDateValid = false;
+            areDateElementsValid = false;
         }
     }
 
-    if (!isDateStructureValid || !isDateValid) {
-        birthDateInfoSpan.style.color = "red";
+    if (!isDateStructureValid || !areDateElementsValid) {
         isFormValid = false;
 
-        if (!isDateValid) {
+        if (!areDateElementsValid) {
             birthDateInfoSpan.innerHTML = "Nieporawne elementy daty: " + invalidDateElementsInfo.join(", ");
         } else if (!isDateStructureValid) {
-            birthDateInfoSpan.innerHTML = "Format daty nieznany";
+            birthDateInfoSpan.innerHTML = "Niedozwolony format daty";
         }
     } else {
-        birthDateInfoSpan.innerHTML = "";
+        birthDateInfoSpan.innerHTML = inputValidMsg;
     }
 
     const emailInfoSpan = document.getElementById("email-info");
     const emailInputValue = form["email"].value;
     if (!emailPattern.test(emailInputValue)) {
         emailInfoSpan.innerHTML = "Email niepoprawny!";
-        emailInfoSpan.style.color = "red";
         isFormValid = false;
     } else {
-        emailInfoSpan.innerHTML = "";
+        emailInfoSpan.innerHTML = inputValidMsg;
     }
 
     const loginInfoSpan = document.getElementById("login-info");
     const loginInputValue = form["login"].value;
     if (!loginPattern.test(loginInputValue)) {
-        loginInfoSpan.innerHTML = "Login niepoprawny: tylko małe litery!";
-        loginInfoSpan.style.color = "red";
+        loginInfoSpan.innerHTML = "Dozwolone tylko małe litery!";
         isFormValid = false;
     } else {
-        loginInfoSpan.innerHTML = "";
+        loginInfoSpan.innerHTML = inputValidMsg;
     }
 
     const passwordInfoSpan = document.getElementById("password-info");
@@ -105,7 +101,6 @@ function validateRegexForm() {
 
     if (passwordInputValue.length === 0) {
         passwordInfoSpan.innerHTML = "Pole nie może być puste!";
-        passwordInfoSpan.style.color = "red";
         isFormValid = false;
     } else {
         passwordInfoSpan.innerHTML = "";
@@ -113,7 +108,6 @@ function validateRegexForm() {
 
     if (repeatPasswordInputValue.length === 0) {
         repeatPasswordInfoSpan.innerHTML = "Pole nie może być puste!";
-        repeatPasswordInfoSpan.style.color = "red";
         isFormValid = false;
     } else {
         repeatPasswordInfoSpan.innerHTML = "";
@@ -122,26 +116,23 @@ function validateRegexForm() {
     if (passwordInputValue !== repeatPasswordInputValue) {
         if (passwordInputValue.length !== 0) {
             passwordInfoSpan.innerHTML = "Podane hasła są różne!";
-            passwordInfoSpan.style.color = "red";
         }
         if (repeatPasswordInputValue.length !== 0) {
             repeatPasswordInfoSpan.innerHTML = "Podane hasła są różne!";
-            repeatPasswordInfoSpan.style.color = "red";
         }
         isFormValid = false;
     } else {
         if (passwordInputValue.length !== 0) {
-            passwordInfoSpan.innerHTML = "";
+            passwordInfoSpan.innerHTML = inputValidMsg;
         }
         if (repeatPasswordInputValue.length !== 0) {
-            repeatPasswordInfoSpan.innerHTML = "";
+            repeatPasswordInfoSpan.innerHTML = inputValidMsg;
         }
     }
 
     const formInfoSummarySpan = document.getElementById('check-info-summary');
     if (isFormValid) {
         formInfoSummarySpan.innerHTML = "Formularz poprawny, dane zostały przesłane.";
-        formInfoSummarySpan.style.color = "green";
         // In order to see the message
         return false;
     } else {

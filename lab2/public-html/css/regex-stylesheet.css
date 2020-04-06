@@ -3,3 +3,19 @@
     border: darkgrey 1px solid;
     padding: 20px 20px 20px 20px;
 }
+
+.check-info {
+    margin: 0 0 0 20px;
+    font-size: 10pt;
+    color: red;
+}
+
+#check-info-summary {
+    margin: 0 0 0 40px;
+    font-size: 10pt;
+    color: green;
+}
+
+input {
+    margin: 0 0 5px 0;
+}
