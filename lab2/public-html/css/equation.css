@@ -1,8 +1,12 @@
 .equation-element {
-    font-family: Calibri, fantasy;
+    font-family: Consolas, fantasy;
     margin-left: 3px;
 }
 
 #equation-text {
     margin-right: 10px;
+}
+
+#solution-info {
+    margin-left: 10px;
 }

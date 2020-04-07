@@ -10,7 +10,7 @@
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <!-- Custom stylesheet -->
-    <link rel="stylesheet" href="css/regex-stylesheet.css">
+    <link rel="stylesheet" href="css/regex.css">
     <link rel="stylesheet" href="css/equation.css">
 
     <!-- Custom javascript -->
@@ -26,7 +26,7 @@
         <div class="col-4">
             <div class="form-container">
                 <p>Wprowadź współczynniki równania kwadratowego:</p>
-                <form id="equation-form" name="equationForm" action="#" method="post" onsubmit="return false;">
+                <form id="equation-form" name="equationForm" action="#" method="post">
                     <label for="coef-a">a:</label><br>
                     <input id="coef-a" type="text" name="coefA"><span
                         id="coef-a-info"
@@ -41,7 +41,8 @@
                         class="check-info"></span><br>
                     <br><br>
                 </form>
-                <button id="submit-button" type="button" onclick="solveEquation()">Rozwiąż równanie</button><br>
+                <button id="submit-button" type="button" onclick="solveEquation();">Rozwiąż równanie</button>
+                <br>
             </div>
         </div>
         <div class="col-3">
@@ -54,13 +55,13 @@
                 <span id="coef-c-holder" class="coef-holder">c</span><span class="equation-element">=</span><span
                     class="equation-element">0</span>
                 <br><br>
-                <span id="solution-info">Wynik:-</span>
+                <span id="solution-text">Wynik:</span><span id="solution-info"></span>
                 <br><br>
                 <span>Pierwiastek x<sub>1</sub>:</span>
-                <output id="root-1" name="root1" for="coefA coefB coefC">-</output>
+                <output id="root-1" name="root1" for="coef-a coef-b coef-c">-</output>
                 <br><br>
                 <span>Pierwiastek x<sub>2</sub>:</span>
-                <output id="root-2" name="root2" for="coefA coefB coefC">-</output>
+                <output id="root-2" name="root2" for="coef-a coef-b coef-c">-</output>
                 <br>
             </div>
         </div>

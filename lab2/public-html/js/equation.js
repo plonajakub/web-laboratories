@@ -1,8 +1,3 @@
-document.getElementById("submit-button").addEventListener("click", function (event) {
-    event.preventDefault();
-    solveEquation();
-});
-
 function solveEquation() {
     const coefAInput = document.getElementById("coef-a").value;
     const coefBInput = document.getElementById("coef-b").value;
@@ -52,49 +47,29 @@ function solveEquation() {
 
     if (isEquationValid) {
         let root1, root2;
-        console.log("A:" + coefA + typeof coefA);
-        console.log("B:" + coefB + typeof coefB);
-        console.log("C:" + coefC + typeof coefC);
         let delta = Math.pow(coefB, 2) - 4 * coefA * coefC;
-        console.log("D:" + delta + typeof delta);
         if (delta < 0) {
             root1 = root2 = "";
-            solutionInfo.innerHTML = "Wynik: brak pierwiastków";
+            solutionInfo.innerHTML = "brak pierwiastków";
         } else if (delta === 0) {
             root1 = -coefB / (2 * coefA);
+            root1 = root1.toFixed(2);
             root2 = "";
-            solutionInfo.innerHTML = "Wynik: 1 pierwiastek";
+            solutionInfo.innerHTML = "1 pierwiastek";
         } else {
             root1 = (-coefB - Math.sqrt(delta)) / (2 * coefA);
+            root1 = root1.toFixed(2);
             root2 = (-coefB + Math.sqrt(delta)) / (2 * coefA);
-            solutionInfo.innerHTML = "Wynik: 2 pierwiastki";
+            root2 = root2.toFixed(2);
+            solutionInfo.innerHTML = "2 pierwiastki";
         }
 
+        coefAHolder.innerHTML = getDecoratedNumber(coefA);
+        coefBHolder.innerHTML = getDecoratedNumber(coefB);
+        coefCHolder.innerHTML = getDecoratedNumber(coefC);
 
-        if (coefA < 0) {
-            coefAHolder.innerHTML = "(" + coefA.toString() + ")";
-        } else {
-            coefAHolder.innerHTML = coefA.toString();
-        }
-
-        if (coefB < 0) {
-            coefBHolder.innerHTML = "(" + coefB.toString() + ")";
-        } else {
-            coefBHolder.innerHTML = coefB.toString();
-        }
-
-        if (coefC < 0) {
-            coefCHolder.innerHTML = "(" + coefC.toString() + ")";
-        } else {
-            coefCHolder.innerHTML = coefC.toString();
-        }
-
-        if (!root1 instanceof String) {
-            root1Holder.innerHTML = root1.toFixed(2).toString();
-        }
-        if (!root2 instanceof String) {
-            root2Holder.innerHTML = root2.toFixed(2).toString();
-        }
+        root1Holder.innerHTML = root1;
+        root2Holder.innerHTML = root2;
 
     } else {
         coefAHolder.innerHTML = "a";
@@ -104,8 +79,14 @@ function solveEquation() {
         root1Holder.innerHTML = "-";
         root2Holder.innerHTML = "-";
 
-        solutionInfo.innerHTML = "Wynik: równanie niepoprawne";
+        solutionInfo.innerHTML = "równanie niepoprawne";
     }
+}
 
-    return false;
+function getDecoratedNumber(number) {
+    if (number < 0) {
+       return "(" + number.toString() + ")";
+    } else {
+       return number.toString();
+    }
 }
