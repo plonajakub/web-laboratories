@@ -24,7 +24,7 @@
         <div class="col-3"></div>
         <div class="col-6">
             <div class="form-container">
-                <form id="regex-form" name="regexForm" action="#" method="post" onsubmit="return validateRegexForm()">
+                <form id="regex-form" name="regexForm" action="#" method="post">
                     <label for="first-name">Imię:</label><br>
                     <input id="first-name" type="text" name="firstName" placeholder="Jan"><span
                         id="first-name-info"
@@ -54,9 +54,9 @@
                     <input id="repeat-password" type="password" name="repeatPassword"><span
                         id="repeat-password-info"
                         class="check-info"></span><br>
-                    <br><br>
-                    <input type="submit" value="Zatwierdź"><span id="check-info-summary"></span><br>
                 </form>
+                <br><br>
+                <button type="button" onclick="validateRegexForm();">Zatwierdź</button><span id="check-info-summary"></span><br>
             </div>
         </div>
         <div class="col-3"></div>
