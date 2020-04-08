@@ -1,0 +1,16 @@
+.menu-item {
+    margin: 5px 0 5px 0;
+}
+
+.img-container {
+    margin-top: 100px;
+}
+
+#img-list-container {
+    border: blueviolet 2px solid;
+    text-align: center;
+}
+
+#curr-animal-img {
+    border: crimson 3px solid;
+}
