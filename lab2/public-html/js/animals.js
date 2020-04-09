@@ -13,4 +13,4 @@ window.onload = () => {
             currentAnimalImage.src = "img/white.svg";
         });
     }
-}
+};
