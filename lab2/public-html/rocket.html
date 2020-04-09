@@ -9,17 +9,26 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <title>PIW - lab 2</title>
-</head>
-<body class="p-3">
+    <!-- Custom javascript -->
+    <script src="js/rocket.js"></script>
 
-<p>Spis treści:</p>
-<a href="regex.html">1. Wyrażenia regularne</a><br>
-<a href="equation.html">2. Formularze i JavaScript</a><br>
-<a href="change_img.html">3. Dynamiczna zamiana obrazków pozwalająca m.in. na tworzenie graficznych menu</a><br>
-<a href="animals.html">4. Dynamiczne podmienianie obrazów</a><br>
-<a href="rocket.html">5. Własnoręczna animacja</a><br>
-<a href="#"></a><br>
+    <title>5. Własnoręczna animacja</title>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <div id="animation-container">
+                <img id="rocket-bgd-img" src="img/starfield.gif" alt="starfield">
+                <img id="rocket-img" src="img/rocketship.gif" alt="rocket">
+            </div>
+            <button id="faster-but" type="button">Przyspiesz</button>
+            <button id="slower-but" type="button">Zwolnij</button>
+        </div>
+    </div>
+</div>
+
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
