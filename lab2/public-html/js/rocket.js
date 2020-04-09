@@ -12,7 +12,7 @@ function setupAnimation() {
     rocketBgd.style.top = px2String(animationOriginY);
 
     const animation = new Animation("rocket-img", animationOriginX, animationOriginY + 15,
-        60, 10, animationOriginX + rocketBgd.width);
+        100, 10, animationOriginX + rocketBgd.width);
 
     const fasterButton = document.getElementById("faster-but");
     fasterButton.style.width = "100px";
@@ -60,14 +60,14 @@ function Animation(animationImgID, originX, originY, frameTime, pxPerFrame, xLim
     };
     this.currDelta = function () {
         return this.direction * this.pxPerFrame;
-    }
+    };
     this.nextPosition = function () {
         if (this.currX + this.currDelta() > this.xLimit || this.currX + this.currDelta() < this.originX) {
             this.direction *= -1;
             if (this.direction === -1) {
-                this.animationImg.style.setProperty('transform', 'rotate(180deg)');
+                this.animationImg.style.setProperty("transform", "rotate(180deg)");
             } else {
-                this.animationImg.style.setProperty('transform', 'rotate(0)');
+                this.animationImg.style.setProperty("transform", "rotate(0)");
             }
         }
         this.currX += this.currDelta();
