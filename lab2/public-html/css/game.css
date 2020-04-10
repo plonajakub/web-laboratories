@@ -1,0 +1,29 @@
+#game-status-bar {
+    border: blueviolet 1px solid;
+    margin: 50px 0 0 5px;
+}
+
+#game-area {
+    border: crimson 1px solid;
+    position: relative;
+    width: 500px;
+    height: 500px;
+    left: 50px;
+}
+
+#game-element {
+    background: green;
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.bar-element {
+    margin: 5px 0 5px 10px;
+}
+
+.bar-value {
+    margin: 5px 0 5px 5px;
+}
