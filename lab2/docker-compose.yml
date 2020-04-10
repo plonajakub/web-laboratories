@@ -1,5 +1,5 @@
 httpd:
   build: .
-  hostname: "lab1-httpd"
+  hostname: "lab2-httpd"
   ports:
    - "127.0.0.1:8080:80"
