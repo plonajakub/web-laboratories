@@ -1,6 +1,6 @@
 window.onload = () => {
     setupGame();
-}
+};
 
 function setupGame() {
     const gameButton = document.getElementById("game-button");
@@ -22,12 +22,12 @@ function setupGame() {
             ++this.currentTime;
             this.clockHolder.innerHTML = this.currentTime + "";
         }
-    }
+    };
 
     const gameObjectState = {
         CLICK: "click",
         DNCLICK: "do_not_click"
-    }
+    };
 
     const direction = {
         axisX: {
@@ -38,7 +38,7 @@ function setupGame() {
             UP: 0,
             DOWN: 2
         }
-    }
+    };
 
     const gameObject = {
         state: gameObjectState.DNCLICK,
@@ -93,7 +93,7 @@ function setupGame() {
                 gameElementHook.style.background = "red";
             }
         }
-    }
+    };
 
     gameElementHook.addEventListener("click", () => {
         score += gameObject.getActionScore();
@@ -103,7 +103,7 @@ function setupGame() {
     gameArea.addEventListener("click", () => {
         score += -1;
         scoreHolder.innerHTML = score + "";
-    })
+    });
 
     gameButton.addEventListener("click", () => {
         clock.resetTime();
@@ -113,7 +113,7 @@ function setupGame() {
 
     setInterval(() => {
         gameObject.nextPosition();
-    }, 1);
+    }, 100);
 
     setInterval(() => {
         gameObject.rollNextState();
