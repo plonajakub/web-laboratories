@@ -87,27 +87,21 @@ function drawShape(shapeId, shapeIDs, color, ctx, mouseEvent) {
     if (shapeId === shapeIDs.rectangle) {
         drawRectangle(ctx,
             mouseEvent.offsetX, mouseEvent.offsetY,
-            ctx.canvas.offsetWidth / 10, ctx.canvas.offsetHeight / 10,
-            color.value,
-            false);
+            ctx.canvas.width / 10, ctx.canvas.height / 10,
+            color.value, false);
     } else if (shapeId === shapeIDs.filledRectangle) {
         drawRectangle(ctx,
             mouseEvent.offsetX, mouseEvent.offsetY,
-            ctx.canvas.offsetWidth / 10, ctx.canvas.offsetHeight / 10,
-            color.value,
-            true);
+            ctx.canvas.width / 10, ctx.canvas.height / 10,
+            color.value, true);
     } else if (shapeId === shapeIDs.circle) {
-        drawCircle(ctx,
-            mouseEvent.offsetX, mouseEvent.offsetY,
-            ctx.canvas.offsetWidth / 20,
-            color.value,
-            false);
+        drawCircle(ctx, mouseEvent.offsetX, mouseEvent.offsetY,
+            ((ctx.canvas.width + ctx.canvas.height) / 2) / 20,
+            color.value, false);
     } else if (shapeId === shapeIDs.filledCircle) {
-        drawCircle(ctx,
-            mouseEvent.offsetX, mouseEvent.offsetY,
-            ctx.canvas.offsetWidth / 20,
-            color.value,
-            true);
+        drawCircle(ctx, mouseEvent.offsetX, mouseEvent.offsetY,
+            ((ctx.canvas.width + ctx.canvas.height) / 2) / 20,
+            color.value, true);
     }
 }
 
