@@ -1,0 +1,5 @@
+httpd:
+  build: .
+  hostname: "lab3-httpd"
+  ports:
+   - "127.0.0.1:8080:80"

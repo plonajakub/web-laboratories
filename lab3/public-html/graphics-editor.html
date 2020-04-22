@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="css/graphics-editor.css">
+
+    <title>Edytor graficzny</title>
+</head>
+<body>
+
+<div id="page">
+    <div id="editor">
+        <div id="editor-menu">
+            <button type="button" id="rectangle" class="editor-menu-item">Prostokąt</button>
+            <button type="button" id="filled-rectangle" class="editor-menu-item">Wyp. prostokąt</button>
+            <button type="button" id="circle" class="editor-menu-item">Okrąg</button>
+            <button type="button" id="filled-circle" class="editor-menu-item">Koło</button>
+            <label id="color-label" for="color" class="editor-menu-item">
+                Kolor: <input id="color" type="color">
+            </label>
+            <button id="clear-button" class="editor-menu-item" type="button">Wyczyść</button>
+        </div>
+        <div id="canvas-container">
+            <canvas id="canvas-main"></canvas>
+            <canvas id="canvas-preview"></canvas>
+        </div>
+    </div>
+</div>
+
+<script src="js/graphics-editor.js"></script>
+</body>
+</html>
