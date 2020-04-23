@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Gra: Space Invaders</title>
+
+    <link rel="stylesheet" href="css/space-invaders.css">
+</head>
+<body>
+
+<div id="page">
+    <div id="game" class="row">
+        <div id="game-panel" class="left-col">
+            <div id="game-bar">
+            <span class="game-bar-item">
+                <span id="game-score-text">Wynik:</span>
+                <span id="game-score-value" class="value-holder">-</span>
+            </span>
+                <span class="game-bar-item">
+                <span id="player-name-text">Gracz:</span>
+                <span id="player-name-value" class="value-holder">-</span>
+            </span>
+                <button type="button" id="reset-button">Reset</button>
+            </div>
+            <div id="game-canvas-container">
+                <canvas id="game-canvas"></canvas>
+            </div>
+        </div>
+        <div id="game-scoreboard" class="right-col">
+            <div id="scoreboard-text">Tabela wyników</div>
+            <div class="scoreboard-entry">
+                <span id="player-1-text">1.</span>
+                <span id="player-1-value" class="value-holder">-</span>
+            </div>
+            <div class="scoreboard-entry">
+                <span id="player-2-text">2.</span>
+                <span id="player-2-value" class="value-holder">-</span>
+            </div>
+            <div class="scoreboard-entry">
+                <span id="player-3-text">3.</span>
+                <span id="player-3-value" class="value-holder">-</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/space-invaders.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+* {
+    box-sizing: border-box;
+    font-family: Consolas, fantasy;
+}
+
+.left-col {
+    float: left;
+    width: 75%;
+}
+
+.right-col {
+    float: left;
+    width: 24.5%;
+    margin-left: 0.5%;
+}
+
+#game {
+    height: 600px;
+    width: 75%;
+
+    margin: 0 auto;
+    border: 2px solid cornflowerblue;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+}
+
+#game-bar {
+    border: 2px solid cornflowerblue;
+    padding: 10px;
+    text-align: center;
+}
+
+#game-scoreboard {
+    border: 2px solid cornflowerblue;
+    padding: 10px;
+    flex-grow: 1;
+}
+
+.game-bar-item {
+    margin: 0 10px;
+    min-width: 20%;
+    border: 3px solid crimson;
+    padding: 10px;
+    display: inline-block;
+}
+
+#game-panel {
+    display: flex;
+    flex-direction: column;
+}
+
+#game-canvas-container {
+    margin-top: 3px;
+    border: 2px solid crimson;
+    flex-grow: 1;
+}
+
+.value-holder {
+    margin-left: 10px;
+}
+
+.scoreboard-entry {
+    margin: 15px auto;
+}
+
+#scoreboard-text {
+    text-align: center;
+}
+
+#reset-button {
+    height: 30px;
+    margin-left: 10px;
+}
