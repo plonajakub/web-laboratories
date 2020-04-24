@@ -259,10 +259,9 @@ class Game {
         const gunHeight = 0.05 * canvas.height;
 
         this.ctx = canvas.getContext("2d");
-
         this.gameObjects = {
             gun: new Gun(canvas.width / 2, canvas.height - gunHeight, 5, gunWidth, gunHeight,
-                "#254b93", this.ctx, 10),
+                "#547fee", this.ctx, 10),
             bullets: new Bullets(),
             aliens: new Aliens("#1ba81b", 0.3, 0.2, 0.8,
                 0.1, 0.05, this.ctx)
@@ -279,6 +278,12 @@ class Game {
 
         this.gunLivesHolder = document.getElementById("game-lives-value");
         this.gunLivesHolder.innerHTML = this.gameObjects.gun.hp + "";
+
+        this.nStars = 20;
+        this.starsCoordinates = [];
+        for (let i = 0; i < this.nStars; ++i) {
+            this.starsCoordinates.push([Math.random() * this.ctx.canvas.width, Math.random() * this.ctx.canvas.height]);
+        }
 
         // Handlers
         window.addEventListener("keydown", (event) => {
@@ -306,6 +311,26 @@ class Game {
         setInterval(() => {
             this.gameObjects.aliens.fireBullets(0.05, this.gameObjects.bullets.list);
         }, 1000);
+
+        setInterval(() => {
+            for (let i = 0; i < this.nStars; ++i) {
+                this.starsCoordinates[i][0] = Math.random() * this.ctx.canvas.width;
+                this.starsCoordinates[i][1] = Math.random() * this.ctx.canvas.height;
+            }
+        }, 2000);
+    }
+
+    drawBackground() {
+        this.ctx.beginPath();
+        this.ctx.rect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+        this.ctx.fillStyle = "#1010ad";
+        this.ctx.fill();
+        for (let i = 0; i < this.nStars; ++i) {
+            this.ctx.beginPath();
+            this.ctx.arc(this.starsCoordinates[i][0], this.starsCoordinates[i][1], 1, 0, 2 * Math.PI);
+            this.ctx.fillStyle = "#ffffff";
+            this.ctx.fill();
+        }
     }
 
     doGlobalActions() {
@@ -377,6 +402,7 @@ class Game {
 
     redraw() {
         this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+        this.drawBackground();
         for (const gameObject of Object.values(this.gameObjects)) {
             gameObject.draw();
         }
