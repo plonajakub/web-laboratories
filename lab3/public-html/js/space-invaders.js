@@ -72,6 +72,7 @@ class Alien extends Drawable {
                     this.x -= this.xSpeed * this.dx;
                     break;
             }
+            this.y += this.ySpeed * this.dy;
         }
     }
 }
@@ -150,6 +151,17 @@ class Aliens {
                 bullets.push(new Bullet(alien, 1, 2, "#00ff00", this.ctx, Bullet.Type.alien));
             }
         }
+    }
+
+    isSiegeSuccessful () {
+        for (const alien of this.list) {
+            const nextAlienY = alien.y + alien.height / 2 + alien.ySpeed * alien.dy;
+            const siegeLimitY = this.siegeHeightPercentage * this.ctx.canvas.height;
+            if (nextAlienY > siegeLimitY) {
+                return true;
+            }
+        }
+        return false;
     }
 
     clean() {
@@ -247,6 +259,7 @@ class Game {
         const gunHeight = 0.05 * canvas.height;
 
         this.ctx = canvas.getContext("2d");
+
         this.gameObjects = {
             gun: new Gun(canvas.width / 2, canvas.height - gunHeight, 5, gunWidth, gunHeight,
                 "#254b93", this.ctx, 10),
@@ -254,7 +267,7 @@ class Game {
             aliens: new Aliens("#1ba81b", 0.3, 0.2, 0.8,
                 0.1, 0.05, this.ctx)
         };
-        this.gameObjects.aliens.initialize(3, 1, 3, 11, 5);
+        this.gameObjects.aliens.initialize(3, 0.05, 3, 11, 5);
 
         this.gunLivesHolder = document.getElementById("game-lives-value");
         this.gunLivesHolder.innerHTML = this.gameObjects.gun.hp + "";
@@ -340,6 +353,11 @@ class Game {
                     this.isGameOver = true;
                 }
             }
+        }
+
+        // Alien siege
+        if (this.gameObjects.aliens.isSiegeSuccessful()) {
+            this.isGameOver = true;
         }
     }
 
