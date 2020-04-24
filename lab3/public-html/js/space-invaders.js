@@ -153,7 +153,7 @@ class Aliens {
         }
     }
 
-    isSiegeSuccessful () {
+    isSiegeSuccessful() {
         for (const alien of this.list) {
             const nextAlienY = alien.y + alien.height / 2 + alien.ySpeed * alien.dy;
             const siegeLimitY = this.siegeHeightPercentage * this.ctx.canvas.height;
@@ -267,7 +267,15 @@ class Game {
             aliens: new Aliens("#1ba81b", 0.3, 0.2, 0.8,
                 0.1, 0.05, this.ctx)
         };
-        this.gameObjects.aliens.initialize(3, 0.05, 3, 11, 5);
+
+        this.alienSpeedX = 3;
+        this.alienSpeedY = 0.05;
+        this.alienSpeedXModifier = 0.3;
+        this.alienSpeedYModifier = 0.03;
+        this.alienHp = 3;
+        this.nAliensX = 11;
+        this.nAliensY = 5;
+        this.gameObjects.aliens.initialize(this.alienSpeedX, this.alienSpeedY, this.alienHp, this.nAliensX, this.nAliensY);
 
         this.gunLivesHolder = document.getElementById("game-lives-value");
         this.gunLivesHolder.innerHTML = this.gameObjects.gun.hp + "";
@@ -303,6 +311,12 @@ class Game {
     doGlobalActions() {
         this.gameScoreHolder.innerHTML = this.gameScore + "";
         this.gunLivesHolder.innerHTML = this.gameObjects.gun.hp + "";
+
+        if (this.gameObjects.aliens.list.length === 0) {
+            this.alienSpeedX += this.alienSpeedXModifier;
+            this.alienSpeedY += this.alienSpeedYModifier;
+            this.gameObjects.aliens.initialize(this.alienSpeedX, this.alienSpeedY, this.alienHp, this.nAliensX, this.nAliensY);
+        }
     }
 
     detectGlobalCollisions() {
