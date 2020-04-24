@@ -324,7 +324,7 @@ class Game {
             if (bullet.type === Bullet.Type.gun) {
                 continue;
             }
-            const nextBulletPositionY = bullet.y - bullet.radius + bullet.dy;
+            const nextBulletPositionY = bullet.y + bullet.radius + bullet.dy;
             const bulletPositionX = bullet.x;
             const gunTop = this.gameObjects.gun.y - this.gameObjects.gun.height / 2;
             const gunBottom = this.gameObjects.gun.y + this.gameObjects.gun.height / 2;
@@ -340,7 +340,6 @@ class Game {
                     this.isGameOver = true;
                 }
             }
-
         }
     }
 
