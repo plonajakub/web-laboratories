@@ -142,6 +142,16 @@ class Aliens {
         }
     }
 
+    fireBullets(alienFireProbability, bullets) {
+        let roll;
+        for (const alien of this.list) {
+            roll = Math.random();
+            if (roll < alienFireProbability) {
+                bullets.push(new Bullet(alien, 1, 2, "#00ff00", this.ctx, Bullet.Type.alien));
+            }
+        }
+    }
+
     clean() {
         const aliveAliens = [];
         for (const alien of this.list) {
@@ -172,10 +182,11 @@ class Bullet extends Drawable {
 }
 
 class Gun extends Drawable {
-    constructor(startX, startY, dx, width, height, color, ctx) {
+    constructor(startX, startY, dx, width, height, color, ctx, startHp) {
         super(startX, startY, dx, 0, width, height, color, ctx, Shapes.rectangle);
         this.isMovingLeft = false;
         this.isMovingRight = false;
+        this.hp = startHp;
     }
 
     move() {
@@ -227,6 +238,8 @@ class Game {
         this.gameScore = 0;
         this.gameScoreHolder.innerHTML = this.gameScore + "";
 
+        this.isGameOver = false;
+
         const canvas = document.getElementById("game-canvas");
         canvas.width = canvas.offsetWidth;
         canvas.height = canvas.offsetHeight;
@@ -236,12 +249,15 @@ class Game {
         this.ctx = canvas.getContext("2d");
         this.gameObjects = {
             gun: new Gun(canvas.width / 2, canvas.height - gunHeight, 5, gunWidth, gunHeight,
-                "#254b93", this.ctx),
+                "#254b93", this.ctx, 10),
             bullets: new Bullets(),
             aliens: new Aliens("#1ba81b", 0.3, 0.2, 0.8,
                 0.1, 0.05, this.ctx)
         };
         this.gameObjects.aliens.initialize(3, 1, 3, 11, 5);
+
+        this.gunLivesHolder = document.getElementById("game-lives-value");
+        this.gunLivesHolder.innerHTML = this.gameObjects.gun.hp + "";
 
         // Handlers
         window.addEventListener("keydown", (event) => {
@@ -265,10 +281,15 @@ class Game {
                 this.gameObjects.gun.isMovingRight = false;
             }
         });
+
+        setInterval(() => {
+            this.gameObjects.aliens.fireBullets(0.05, this.gameObjects.bullets.list);
+        }, 1000);
     }
 
     doGlobalActions() {
         this.gameScoreHolder.innerHTML = this.gameScore + "";
+        this.gunLivesHolder.innerHTML = this.gameObjects.gun.hp + "";
     }
 
     detectGlobalCollisions() {
@@ -297,6 +318,30 @@ class Game {
                 }
             }
         }
+
+        // Alien bullet hit gun
+        for (const bullet of this.gameObjects.bullets.list) {
+            if (bullet.type === Bullet.Type.gun) {
+                continue;
+            }
+            const nextBulletPositionY = bullet.y - bullet.radius + bullet.dy;
+            const bulletPositionX = bullet.x;
+            const gunTop = this.gameObjects.gun.y - this.gameObjects.gun.height / 2;
+            const gunBottom = this.gameObjects.gun.y + this.gameObjects.gun.height / 2;
+            const gunLeft = this.gameObjects.gun.x - this.gameObjects.gun.width / 2;
+            const gunRight = this.gameObjects.gun.x + this.gameObjects.gun.width / 2;
+            if (nextBulletPositionY <= gunBottom &&
+                nextBulletPositionY >= gunTop &&
+                bulletPositionX >= gunLeft &&
+                bulletPositionX <= gunRight) {
+                bullet.isVisible = false;
+                --this.gameObjects.gun.hp;
+                if (this.gameObjects.gun.hp <= 0) {
+                    this.isGameOver = true;
+                }
+            }
+
+        }
     }
 
     redraw() {
@@ -316,12 +361,21 @@ class Game {
         this.gameObjects.bullets.clean();
         this.gameObjects.aliens.clean();
     }
+
+    gameOver() {
+        alert(`Koniec gry!\r\nTwój wynik: ${this.gameScore}.`);
+    }
 }
 
 
-let game;
+let game = null;
 
 function gameLoop() {
+    if (game.isGameOver) {
+        game.gameOver();
+        game = null;
+        return;
+    }
     game.doGlobalActions();
     game.detectGlobalCollisions();
     game.reposition();
@@ -332,7 +386,14 @@ function gameLoop() {
 
 window.onload = () => {
     document.getElementById("reset-button").addEventListener("click", () => {
+        let isGameRunning = true;
+        if (game === null) {
+            isGameRunning = false;
+        }
         game = new Game();
+        if (!isGameRunning) {
+            gameLoop();
+        }
     });
     game = new Game();
     gameLoop();
