@@ -141,16 +141,28 @@ class Aliens {
             alien.move();
         }
     }
+
+    clean() {
+        const aliveAliens = [];
+        for (const alien of this.list) {
+            if (alien.isVisible) {
+                aliveAliens.push(alien);
+            }
+        }
+        this.list = aliveAliens;
+    }
 }
 
 class Bullet extends Drawable {
-    constructor(gun, dy, radius, color, ctx) {
-        super(gun.x, gun.y - gun.height * 3 / 5, 0, dy, radius, 0, color, ctx, Shapes.circle);
+    constructor(source, dy, radius, color, ctx, type) {
+        super(source.x, source.y - source.height * 3 / 5, 0, dy, radius, 0, color, ctx, Shapes.circle);
         this.radius = radius;
+        this.type = type;
     }
 
     move() {
-        if (this.y - this.radius < 0) {
+        if (this.y - this.radius < 0 ||
+            this.y + this.radius > this.ctx.canvas.height) {
             this.isVisible = false;
         }
         if (this.isVisible) {
@@ -176,6 +188,11 @@ class Gun extends Drawable {
     }
 }
 
+Bullet.Type = {
+    alien: "alien",
+    gun: "gun"
+};
+
 class Bullets {
     constructor() {
         this.list = [];
@@ -192,10 +209,24 @@ class Bullets {
             bullet.move();
         }
     }
+
+    clean() {
+        const flyingBullets = [];
+        for (const bullet of this.list) {
+            if (bullet.isVisible) {
+                flyingBullets.push(bullet);
+            }
+        }
+        this.list = flyingBullets;
+    }
 }
 
 class Game {
     constructor() {
+        this.gameScoreHolder = document.getElementById("game-score-value");
+        this.gameScore = 0;
+        this.gameScoreHolder.innerHTML = this.gameScore + "";
+
         const canvas = document.getElementById("game-canvas");
         canvas.width = canvas.offsetWidth;
         canvas.height = canvas.offsetHeight;
@@ -208,7 +239,7 @@ class Game {
                 "#254b93", this.ctx),
             bullets: new Bullets(),
             aliens: new Aliens("#1ba81b", 0.3, 0.2, 0.8,
-                0.1, 0.1, this.ctx)
+                0.1, 0.05, this.ctx)
         };
         this.gameObjects.aliens.initialize(3, 1, 3, 11, 5);
 
@@ -221,7 +252,8 @@ class Game {
                 this.gameObjects.gun.isMovingRight = true;
             }
             if (event.code === "Space" && !event.repeat) {
-                this.gameObjects.bullets.list.push(new Bullet(this.gameObjects.gun, -3, 2, "#ff0000", this.ctx));
+                this.gameObjects.bullets.list.push(new Bullet(this.gameObjects.gun, -3, 2, "#ff0000",
+                    this.ctx, Bullet.Type.gun));
             }
         });
 
@@ -233,6 +265,38 @@ class Game {
                 this.gameObjects.gun.isMovingRight = false;
             }
         });
+    }
+
+    doGlobalActions() {
+        this.gameScoreHolder.innerHTML = this.gameScore + "";
+    }
+
+    detectGlobalCollisions() {
+        // Gun bullet hit alien
+        for (const bullet of this.gameObjects.bullets.list) {
+            if (bullet.type === Bullet.Type.alien) {
+                continue;
+            }
+            for (const alien of this.gameObjects.aliens.list) {
+                const nextBulletPositionY = bullet.y - bullet.radius + bullet.dy;
+                const bulletPositionX = bullet.x;
+                const alienTop = alien.y - alien.height / 2;
+                const alienBottom = alien.y + alien.height / 2;
+                const alienLeft = alien.x - alien.width / 2;
+                const alienRight = alien.x + alien.width / 2;
+                if (nextBulletPositionY <= alienBottom &&
+                    nextBulletPositionY >= alienTop &&
+                    bulletPositionX >= alienLeft &&
+                    bulletPositionX <= alienRight) {
+                    bullet.isVisible = false;
+                    --alien.hp;
+                    if (alien.hp <= 0) {
+                        ++this.gameScore;
+                        alien.isVisible = false;
+                    }
+                }
+            }
+        }
     }
 
     redraw() {
@@ -249,20 +313,17 @@ class Game {
     }
 
     clean() {
-        const visibleBullets = [];
-        for (const bullet of this.gameObjects.bullets.list) {
-            if (bullet.isVisible) {
-                visibleBullets.push(bullet);
-            }
-        }
-        this.gameObjects.bullets.list = visibleBullets;
+        this.gameObjects.bullets.clean();
+        this.gameObjects.aliens.clean();
     }
 }
 
 
-const game = new Game();
+let game;
 
 function gameLoop() {
+    game.doGlobalActions();
+    game.detectGlobalCollisions();
     game.reposition();
     game.redraw();
     requestAnimationFrame(gameLoop);
@@ -270,5 +331,9 @@ function gameLoop() {
 }
 
 window.onload = () => {
+    document.getElementById("reset-button").addEventListener("click", () => {
+        game = new Game();
+    });
+    game = new Game();
     gameLoop();
 };
