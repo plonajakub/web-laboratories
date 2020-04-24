@@ -42,10 +42,11 @@ class Drawable {
 class Bullet extends Drawable {
     constructor(gun, dy, radius, color, ctx) {
         super(gun.x, gun.y - gun.height * 3 / 5, 0, dy, radius, 0, color, ctx, Shapes.circle);
+        this.radius = radius;
     }
 
     move() {
-        if (this.y - this.width < 0) { // this.width = radius
+        if (this.y - this.radius < 0) {
             this.isVisible = false;
         }
         if (this.isVisible) {
@@ -55,7 +56,7 @@ class Bullet extends Drawable {
 }
 
 class Gun extends Drawable {
-    constructor(startX, startY, dx, width, height, color, ctx, bullet) {
+    constructor(startX, startY, dx, width, height, color, ctx) {
         super(startX, startY, dx, 0, width, height, color, ctx, Shapes.rectangle);
         this.isMovingLeft = false;
         this.isMovingRight = false;
@@ -71,6 +72,24 @@ class Gun extends Drawable {
     }
 }
 
+class Bullets {
+    constructor() {
+        this.list = [];
+    }
+
+    draw() {
+        for (const bullet of this.list) {
+            bullet.draw();
+        }
+    }
+
+    move() {
+        for (const bullet of this.list) {
+            bullet.move();
+        }
+    }
+}
+
 class Game {
     constructor() {
         const canvas = document.getElementById("game-canvas");
@@ -82,40 +101,28 @@ class Game {
         this.ctx = canvas.getContext("2d");
         this.gameObjects = {
             gun: new Gun(canvas.width / 2, canvas.height - gunHeight, 5, gunWidth, gunHeight,
-                "#FF0000", this.ctx),
-            bullets: {
-                list: [],
-                draw: function () {
-                    for (const bullet of this.list) {
-                        bullet.draw();
-                    }
-                },
-                move: function () {
-                    for (const bullet of this.list) {
-                        bullet.move();
-                    }
-                }
-            },
-        }
+                "#254b93", this.ctx),
+            bullets: new Bullets()
+        };
 
         // Handlers
         window.addEventListener("keydown", (event) => {
-            if (event.key === "a") {
+            if (event.code === "KeyA") {
                 this.gameObjects.gun.isMovingLeft = true;
             }
-            if (event.key === "d") {
+            if (event.code === "KeyD") {
                 this.gameObjects.gun.isMovingRight = true;
             }
-            if (event.key === " " && !event.repeat) {
-                this.gameObjects.bullets.list.push(new Bullet(this.gameObjects.gun, -3, 2, "#00FF00", this.ctx));
+            if (event.code === "Space" && !event.repeat) {
+                this.gameObjects.bullets.list.push(new Bullet(this.gameObjects.gun, -3, 2, "#ff0000", this.ctx));
             }
         });
 
         window.addEventListener("keyup", (event) => {
-            if (event.key === "a") {
+            if (event.code === "KeyA") {
                 this.gameObjects.gun.isMovingLeft = false;
             }
-            if (event.key === "d") {
+            if (event.code === "KeyD") {
                 this.gameObjects.gun.isMovingRight = false;
             }
         });
@@ -123,7 +130,6 @@ class Game {
 
     redraw() {
         this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-
         for (const gameObject of Object.values(this.gameObjects)) {
             gameObject.draw();
         }
