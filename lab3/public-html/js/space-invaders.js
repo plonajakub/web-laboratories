@@ -420,7 +420,27 @@ class Game {
     }
 
     gameOver() {
-        alert(`Koniec gry!\r\nTwój wynik: ${this.gameScore}.`);
+        const playerName = prompt(`Koniec gry!\r\nTwój wynik: ${this.gameScore}.\r\nPodaj nazwę gracza aby zapisać wynik.`);
+        if (!playerName || playerName === "") {
+            return;
+        }
+        const scoreboardEntries = [];
+        let name,score;
+        for (let i = 1; i <= nScoreboardEntry; ++i) {
+            name = localStorage.getItem(getScoreboardNameID(i));
+            score = localStorage.getItem(getScoreboardScoreID(i));
+            if (!name || !score) {
+                continue;
+            }
+            scoreboardEntries.push([name, parseInt(score)]);
+        }
+        scoreboardEntries.push([playerName, this.gameScore]);
+        scoreboardEntries.sort((lhs, rhs) => rhs[1] - lhs[1]);
+        for (let i = 0; i < Math.min(scoreboardEntries.length, nScoreboardEntry); ++i) {
+            localStorage.setItem(getScoreboardNameID(i + 1), scoreboardEntries[i][0]);
+            localStorage.setItem(getScoreboardScoreID(i + 1), scoreboardEntries[i][1] + "");
+        }
+        setScoreboard();
     }
 }
 
@@ -452,6 +472,30 @@ window.onload = () => {
             gameLoop();
         }
     });
+    setScoreboard();
     game = new Game();
     gameLoop();
 };
+
+function getScoreboardNameID(id) {
+    return `player-${id}-name`;
+}
+
+function getScoreboardScoreID(id) {
+    return `player-${id}-score`;
+}
+
+const nScoreboardEntry = 5;
+
+function setScoreboard() {
+    let name, score;
+    for (let i = 1; i <= nScoreboardEntry; ++i) {
+        name = localStorage.getItem(getScoreboardNameID(i));
+        score = localStorage.getItem(getScoreboardScoreID(i));
+        if (!name || !score) {
+            continue;
+        }
+        document.getElementById(getScoreboardNameID(i)).innerHTML = name;
+        document.getElementById(getScoreboardScoreID(i)).innerHTML = score;
+    }
+}
