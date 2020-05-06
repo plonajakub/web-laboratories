@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="css/queue.css">
+
+    <title>Symulacja punktu obsługi</title>
+</head>
+<body>
+
+
+<div id="page">
+    <div id="main-panel" class="container-fluid">
+        <div id="info-panel" class="row">
+            <div class="col">
+                <div class="info-card">
+                    <div class="info-entry">
+                        <span>Urzędnik A:</span><span id="official-a-state" class="info-value">-</span>
+                    </div>
+                    <div class="info-entry">
+                        <span>Urzędnik B:</span><span id="official-b-state" class="info-value">-</span>
+                    </div>
+                    <div class="info-entry">
+                        <span>Urzędnik C:</span><span id="official-c-state" class="info-value">-</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="info-card">
+                    <div class="info-entry">
+                        <span>Stan kolejki:</span>
+                        <span class="info-value">
+                            <span id="queue-size">-</span>
+                            <span>/</span>
+                            <span id="current-queue-capacity">-</span>
+                        </span>
+                    </div>
+                    <div class="info-entry">
+                        <span>Generator:</span><span id="generator-state" class="info-value">-</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="info-card">
+                    <div class="info-entry">
+                        <span>Obsłużeni klienci:</span><span id="served-customers" class="info-value">-</span>
+                    </div>
+                    <div class="info-entry">
+                        <span>Odrzuceni klienci</span><span id="rejected-customers" class="info-value">-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div id="control-panel" class="row">
+            <div class="col">
+                <div class="info-card">
+                    <div class="title">Parametry rozkładu normalnego <br> czas załatwienia sprawy</div>
+                    <div class="info-entry">
+                        <label for="normal-dist-mu">Wartość oczekiwana:</label><br>
+                        <input id="normal-dist-mu" type="number" value="0" required>
+                    </div>
+                    <div class="info-entry">
+                        <label for="normal-dist-sigma">Wariancja:</label><br>
+                        <input id="normal-dist-sigma" type="number" value="1" required>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="info-card">
+                    <div class="title">Parametry rozkładu wykładniczego <br> czas przybycia klienta</div>
+                    <div class="info-entry">
+                        <label for="exp-dist-lambda">Lambda:</label><br>
+                        <input id="exp-dist-lambda" type="number" value="1" required>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="info-card">
+                    <div class="info-entry">
+                        <div class="title">Parametry kolejki</div>
+                        <br>
+                        <label for="in-queue-capacity">Pojemność:</label><br>
+                        <input id="in-queue-capacity" type="number" value="10" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="button-container">
+                    <button type="button" id="update-button">Zaktualizuj parametry</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+</html>
