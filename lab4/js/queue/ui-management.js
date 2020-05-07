@@ -58,8 +58,8 @@ function main() {
     queueResolver.onmessage = (e) => {
         if (e.data.type === "new-customer-in-queue" || e.data.type === "new-customer-rejected" ||
             e.data.type === "send-customer" || e.data.type === "queue-empty") {
-            queueSize.innerHTML = e.data.content.queueLength;
-            queueCapacity.innerHTML = e.data.content.queueCapacity;
+            queueSize.innerHTML = e.data.content.queueLength + "";
+            queueCapacity.innerHTML = e.data.content.queueCapacity + "";
         }
         if (e.data.type === "new-customer-rejected") {
             ++nRejectedCustomers;

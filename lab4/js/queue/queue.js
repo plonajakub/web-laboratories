@@ -9,13 +9,13 @@ function setupQueue() {
     generator.onmessage = (e) => {
         if (e.data.type === "new-customer") {
             if (customersQueue.length < queueSize) {
-                customersQueue.push(e.data.content);
+                customersQueue.push(e.data.content.customer);
                 postMessage({
                     type: "new-customer-in-queue",
                     content: {
                         queueLength: customersQueue.length,
                         queueCapacity: queueSize,
-                        customer: e.data.content
+                        customer: e.data.content.customer
                     }
                 });
             } else {
@@ -24,7 +24,7 @@ function setupQueue() {
                     content: {
                         queueLength: customersQueue.length,
                         queueCapacity: queueSize,
-                        customer: e.data.content
+                        customer: e.data.content.customer
                     }
                 });
             }

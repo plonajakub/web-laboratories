@@ -37,7 +37,9 @@ function startGeneration() {
     setTimeout(() => {
         postMessage({
             type: "new-customer",
-            content: newCustomer
+            content: {
+                customer: newCustomer
+            }
         });
         startGeneration();
     }, newCustomer.timeToArrive * 1000);
