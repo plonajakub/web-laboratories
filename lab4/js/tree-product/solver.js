@@ -128,22 +128,49 @@ class Solver {
 
         return bestSolution + "";
     }
+
+    // problemSize: number of vertices in the tree
+    static generateTreeData(problemSize) {
+        const pruferSequence = [];
+        for (let i = 0; i < problemSize - 2; ++i) {
+            pruferSequence.push(Math.floor(Math.random() * problemSize));
+        }
+
+        const vertexDegrees = Array(problemSize).fill(1);
+        for (const psItem of pruferSequence) {
+            ++vertexDegrees[psItem];
+        }
+
+        const A = [], B = [];
+        for (const psItem of pruferSequence) {
+            for (let i = 0; i < problemSize; ++i) {
+                if (vertexDegrees[i] === 1 ) {
+                    A.push(psItem);
+                    B.push(i);
+                    --vertexDegrees[psItem];
+                    --vertexDegrees[i];
+                    break;
+                }
+            }
+        }
+
+        let firstFound = false;
+        for (let i = 0; i < vertexDegrees.length; ++i) {
+            if (vertexDegrees[i] === 1) {
+                if (!firstFound) {
+                    A.push(i);
+                    firstFound = true;
+                } else {
+                    B.push(i);
+                    break;
+                }
+            }
+        }
+        return [A, B];
+    }
 }
 
 // Codility: https://app.codility.com/demo/results/training36T5WN-TQT/
 function solution(A, B) {
     return new Solver().solve(A, B);
-}
-
-main();
-
-function main() {
-    const A1 = [0, 1, 1, 3, 3, 6, 7];
-    const B1 = [1, 2, 3, 4, 5, 3, 5];
-
-    const A2 = [0, 1];
-    const B2 = [1, 2];
-
-    console.log("A1, B1 - (18): " + solution(A1, B1));
-    console.log("A2, B2 -  (3): " + solution(A2, B2));
 }
