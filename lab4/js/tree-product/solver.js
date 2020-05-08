@@ -86,7 +86,7 @@ class Edge {
 }
 
 class Solver {
-    solve(A, B) {
+    static solve(A, B) {
         const edges = [];
         for (let i = 0; i < A.length; ++i) {
             edges.push(new Edge(A[i], B[i]));
@@ -104,6 +104,10 @@ class Solver {
             if (currentSolution > bestSolution) {
                 bestSolution = currentSolution;
             }
+            postMessage({
+                type: "progress-next",
+                content: null
+            });
         }
 
         for (let i = 0; i < edges.length; ++i) {
@@ -123,8 +127,19 @@ class Solver {
                 if (currentSolution > bestSolution) {
                     bestSolution = currentSolution;
                 }
+                postMessage({
+                    type: "progress-next",
+                    content: null
+                });
             }
         }
+
+        postMessage({
+            type: "solution",
+            content: {
+                solutionValue: bestSolution
+            }
+        });
 
         return bestSolution + "";
     }
@@ -172,5 +187,26 @@ class Solver {
 
 // Codility: https://app.codility.com/demo/results/training36T5WN-TQT/
 function solution(A, B) {
-    return new Solver().solve(A, B);
+    return Solver.solve(A, B);
 }
+
+onmessage = (e) => {
+    if (e.data.type === "solve") {
+        const generatedTree = Solver.generateTreeData(e.data.content.problemSize);
+        postMessage({
+            type: "rolled-data",
+            content: {
+                arrayA: generatedTree[0],
+                arrayB: generatedTree[1]
+            }
+        });
+        const edgesLen = generatedTree[0].length;
+        postMessage({
+            type: "progress-max",
+            content: {
+                max: edgesLen + (edgesLen * (edgesLen - 1) / 2)
+            }
+        })
+        Solver.solve(...generatedTree);
+    }
+};
