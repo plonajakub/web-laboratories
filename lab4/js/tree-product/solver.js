@@ -144,7 +144,7 @@ class Solver {
         const A = [], B = [];
         for (const psItem of pruferSequence) {
             for (let i = 0; i < problemSize; ++i) {
-                if (vertexDegrees[i] === 1 ) {
+                if (vertexDegrees[i] === 1) {
                     A.push(psItem);
                     B.push(i);
                     --vertexDegrees[psItem];

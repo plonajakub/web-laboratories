@@ -1,0 +1,38 @@
+#main-panel {
+    margin-top: 50px;
+    width: 75%;
+    border: 2px solid dodgerblue;
+    padding: 10px;
+}
+
+.info-card {
+    height: 100%;
+    margin: 0;
+    border: 2px solid crimson;
+    padding: 10px;
+}
+
+.info-entry {
+    margin-top: 10px;
+}
+
+.title {
+    text-align: center;
+    font-weight: bold;
+}
+
+.center {
+    text-align: center;
+}
+
+.info-value {
+    margin-left: 5px;
+}
+
+.v-fill {
+    height: 50px;
+}
+
+#solution-progress {
+    width: 100%;
+}

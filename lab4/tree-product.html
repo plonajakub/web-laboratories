@@ -16,12 +16,82 @@
 <body>
 
 <div id="page">
-
+    <div id="main-panel" class="container-fluid">
+        <div id="info-panel" class="row">
+            <div class="col">
+                <div class="info-card">
+                    <div class="center">
+                        <div class="info-entry">
+                            <div class="title">Wyliczenie numeru zadania</div>
+                        </div>
+                        <div class="info-entry">
+                            <label for="student-index">Numer indeksu:</label><br>
+                            <input type="number" id="student-index" value="241284" required>
+                        </div>
+                        <div class="info-entry">
+                            <span>Numer zadania:</span><span id="index-remainder" class="info-value">-</span>
+                        </div>
+                        <div class="info-entry">
+                            <a href="https://app.codility.com/programmers/lessons/91-tasks_from_indeed_prime_2016_challenge/tree_product/">
+                                Link do treści zadania
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="info-card">
+                    <div class="center">
+                        <div class="info-entry">
+                            <div class="v-fill"></div>
+                            <div class="title"><a href="https://app.codility.com/demo/results/training36T5WN-TQT/">
+                                Wynik uzyskany w testach Codility
+                            </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="info-card">
+                    <div class="center">
+                        <div class="info-entry">
+                            <div class="title">Panel kontrolny algorytmu</div>
+                        </div>
+                        <div class="info-entry">
+                            <label for="problem-size">Rozmiar problemu:</label><br>
+                            <input type="number" id="problem-size" value="10" required>
+                        </div>
+                        <div class="info-entry">
+                            <button type="button" id="solve-button">Rozwiąż problem</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div id="state-panel" class="row">
+            <div class="col">
+                <div class="info-card">
+                    <div class="info-entry">
+                        <div><b>Wylosowane dane</b></div>
+                        <span>Tablica A:</span><span class="info-value">[<span id="a-array"></span>]</span><br>
+                        <span>Tablica B:</span><span class="info-value">[<span id="b-array"></span>]</span>
+                    </div>
+                    <div class="info-entry">
+                        <b><label for="solution-progress">Postęp zadania:</label></b><br>
+                        <progress id="solution-progress" value="0" max="1"></progress>
+                    </div>
+                    <div class="info-entry">
+                        <b>Rozwiązanie:</b><span id="solution-value" class="info-value">-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
-<!--Debug-->
-<script src="js/tree-product/solver.js"></script>
 <!-- Core JS -->
 <script src="js/tree-product/ui.js"></script>
 
