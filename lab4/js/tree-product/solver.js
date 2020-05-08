@@ -43,9 +43,6 @@ class TreeGraph {
                 visited.push(false);
             }
         }
-        if (this.vertices[v1] === undefined || this.vertices[v2] === undefined) {
-            console.log("this.vertices[v1] === undefined || this.vertices[v2] === undefined");
-        }
 
         edgeQueue.push(this.vertices[v1]);
         visited[v1] = true;
@@ -79,17 +76,6 @@ class TreeGraph {
         return [treeV1, treeV2];
     }
 
-    // clone() {
-    //     const clonedGraph = new TreeGraph();
-    //     clonedGraph.size = this.size;
-    //     for (let i = 0; i < this.vertices.length; ++i) {
-    //         clonedGraph.vertices.push(new Vertex());
-    //     }
-    //     for (let i = 0; i < this.vertices.length; ++i) {
-    //         clonedGraph.vertices[i].neigbours = [...this.vertices[i].neigbours];
-    //     }
-    //     return clonedGraph;
-    // }
 }
 
 class Edge {
@@ -144,7 +130,7 @@ class Solver {
     }
 }
 
-
+// Codility: https://app.codility.com/demo/results/training36T5WN-TQT/
 function solution(A, B) {
     return new Solver().solve(A, B);
 }
