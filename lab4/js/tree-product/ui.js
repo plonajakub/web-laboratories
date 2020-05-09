@@ -20,7 +20,7 @@ class UiHandler {
                 this.solutionProgress.max = e.data.content.max;
             }
             if (e.data.type === "progress-next") {
-                ++this.solutionProgress.value;
+                this.solutionProgress.value = parseInt(this.solutionProgress.value) + e.data.content.progressValue;
             }
             if (e.data.type === "rolled-data") {
                 if (e.data.content.arrayA.length < 50) {

@@ -2,12 +2,6 @@ class Vertex {
     constructor() {
         this.neigbours = [];
     }
-
-    copy() {
-        const vertexCopy = new Vertex();
-        vertexCopy.neigbours = [...this.neigbours];
-        return vertexCopy;
-    }
 }
 
 class TreeGraph {
@@ -31,6 +25,10 @@ class TreeGraph {
 
     containsEdge(v1, v2) {
         return this.vertices[v1] !== undefined && this.vertices[v2] !== undefined;
+    }
+
+    edgeWithLeaf(v1, v2) {
+        return this.vertices[v1].neigbours.length === 1 || this.vertices[v2].neigbours.length === 1;
     }
 
     divideByEdge(v1, v2) {
@@ -66,10 +64,10 @@ class TreeGraph {
         const treeV2 = new TreeGraph();
         for (let i = 0; i < visited.length; ++i) {
             if (visited[i] === true) {
-                treeV1.vertices[i] = this.vertices[i].copy();
+                treeV1.vertices[i] = this.vertices[i];
                 ++treeV1.size;
             } else if (visited[i] === false) {
-                treeV2.vertices[i] = this.vertices[i].copy();
+                treeV2.vertices[i] = this.vertices[i];
                 ++treeV2.size;
             }
         }
@@ -98,23 +96,31 @@ class Solver {
         }
         let bestSolution = originalTree.size;
 
+        let subTrees, currentSolution;
         for (let i = 0; i < edges.length; ++i) {
-            let subTrees = originalTree.divideByEdge(edges[i].v1, edges[i].v2);
-            let currentSolution = subTrees[0].size * subTrees[1].size;
+            Solver.progressNext();
+            if (originalTree.edgeWithLeaf(edges[i].v1, edges[i].v2)) {
+                continue;
+            }
+            subTrees = originalTree.divideByEdge(edges[i].v1, edges[i].v2);
+            currentSolution = subTrees[0].size * subTrees[1].size;
             if (currentSolution > bestSolution) {
                 bestSolution = currentSolution;
             }
-            postMessage({
-                type: "progress-next",
-                content: null
-            });
         }
 
+        let treeToDivide, finalSubTreeIdx, subSubTrees;
         for (let i = 0; i < edges.length; ++i) {
-            let subTrees = originalTree.divideByEdge(edges[i].v1, edges[i].v2);
+            if (originalTree.edgeWithLeaf(edges[i].v1, edges[i].v2)) {
+                Solver.progressNext(edges.length - (i + 1));
+                continue;
+            }
+            subTrees = originalTree.divideByEdge(edges[i].v1, edges[i].v2);
             for (let j = i + 1; j < edges.length; ++j) {
-                let treeToDivide;
-                let finalSubTreeIdx;
+                Solver.progressNext();
+                if (originalTree.edgeWithLeaf(edges[j].v1, edges[j].v2)) {
+                    continue;
+                }
                 if (subTrees[0].containsEdge(edges[j].v1, edges[j].v2)) {
                     treeToDivide = subTrees[0];
                     finalSubTreeIdx = 1;
@@ -122,15 +128,11 @@ class Solver {
                     treeToDivide = subTrees[1];
                     finalSubTreeIdx = 0;
                 }
-                let subSubTrees = treeToDivide.divideByEdge(edges[j].v1, edges[j].v2);
-                let currentSolution = subTrees[finalSubTreeIdx].size * subSubTrees[0].size * subSubTrees[1].size;
+                subSubTrees = treeToDivide.divideByEdge(edges[j].v1, edges[j].v2);
+                currentSolution = subTrees[finalSubTreeIdx].size * subSubTrees[0].size * subSubTrees[1].size;
                 if (currentSolution > bestSolution) {
                     bestSolution = currentSolution;
                 }
-                postMessage({
-                    type: "progress-next",
-                    content: null
-                });
             }
         }
 
@@ -142,6 +144,15 @@ class Solver {
         });
 
         return bestSolution + "";
+    }
+
+    static progressNext(nSteps = 1) {
+        postMessage({
+            type: "progress-next",
+            content: {
+                progressValue: nSteps
+            }
+        });
     }
 
     // problemSize: number of vertices in the tree
@@ -185,7 +196,6 @@ class Solver {
     }
 }
 
-// Codility: https://app.codility.com/demo/results/training36T5WN-TQT/
 function solution(A, B) {
     return Solver.solve(A, B);
 }
@@ -206,7 +216,7 @@ onmessage = (e) => {
             content: {
                 max: edgesLen + (edgesLen * (edgesLen - 1) / 2)
             }
-        })
+        });
         Solver.solve(...generatedTree);
     }
 };
