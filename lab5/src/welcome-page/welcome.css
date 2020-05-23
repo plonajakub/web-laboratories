@@ -1,0 +1,16 @@
+.WelcomePage {
+    padding: 3% 0;
+    text-align: center;
+}
+
+.Box {
+    border: lightgray 2px solid;
+    padding: 1%;
+    margin: 2% 0;
+}
+
+.CBox {
+    background-color: darkslategrey;
+    padding: 1%;
+    margin: 2% 0;
+}
