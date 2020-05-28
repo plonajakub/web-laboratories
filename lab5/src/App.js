@@ -9,6 +9,7 @@ import {
     useRouteMatch,
     useParams
 } from "react-router-dom";
+import BulbSwitcher from "./button/button";
 
 
 function App() {
@@ -29,13 +30,14 @@ function App() {
                         </li>
                     </ol>
                 </div>
+                <hr/>
 
                 <Switch>
                     <Route path="/zad1">
                         <WelcomePage title="MuzykaFilmowa.org"/>
                     </Route>
                     <Route path="/zad2">
-
+                        <BulbSwitcher/>
                     </Route>
                     <Route path="/zad3">
 
