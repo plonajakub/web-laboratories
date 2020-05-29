@@ -10,6 +10,7 @@ import {
     useParams
 } from "react-router-dom";
 import BulbSwitcher from "./button/button";
+import List from "./list/list";
 
 
 function App() {
@@ -40,7 +41,15 @@ function App() {
                         <BulbSwitcher/>
                     </Route>
                     <Route path="/zad3">
-
+                        <List
+                            items={
+                                [
+                                    'Przykładowy tekst 1',
+                                    'Przykładowy tekst 2',
+                                    'Przykładowy tekst 3',
+                                    'Przykładowy tekst 4',
+                                    'Przykładowy tekst 5',
+                                ]}/>
                     </Route>
                 </Switch>
             </div>

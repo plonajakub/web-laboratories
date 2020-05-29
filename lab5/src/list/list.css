@@ -1,0 +1,15 @@
+.list-box {
+    text-align: center;
+    border: 2px solid dodgerblue;
+    padding-bottom: 1%;
+    background-color: blueviolet;
+}
+
+.list-item {
+    border: 1px solid white;
+    background-color: dodgerblue;
+}
+
+.row {
+    margin-top: 1%;
+}
