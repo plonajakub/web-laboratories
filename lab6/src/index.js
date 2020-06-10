@@ -9,7 +9,7 @@ function main() {
             console.error(fib_val);
         }
     }
-    process.exit(1)
+    process.exit(0) // The exit code should be 1. Code equal to 0 is for docker deploy
 }
 
 main();

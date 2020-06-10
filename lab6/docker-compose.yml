@@ -1,0 +1,10 @@
+node:
+    build: .
+    hostname: "lab6-node"
+    ports:
+     - "127.0.0.1:8088:8088"
+html:
+    build: ./public-html
+    hostname: "lab6-html"
+    ports:
+        - "127.0.0.1:8080:80"
