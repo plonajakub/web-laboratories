@@ -19,7 +19,7 @@ module.exports = {
       filename: path.resolve(__dirname, 'dist/subpage.html')
     }),
     new MiniCssExtractPlugin({
-      filename: '../style/style.css',
+      filename: 'style/style.css',
     }),
   ],
   module: {
