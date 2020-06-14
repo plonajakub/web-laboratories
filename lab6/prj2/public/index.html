@@ -5,11 +5,71 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>index.html</title>
+    <title>Losowy kot</title>
 </head>
 
 <body>
-    <h1>index.html</h1>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="#">Koty</a>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+            aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+            <!-- Links -->
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Wylosuj kota</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./subpage.html">O stronie</a>
+                </li>
+            </ul>
+            <!-- Links -->
+
+        </div>
+        <!-- Collapsible content -->
+
+    </nav>
+    <!--/.Navbar-->
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div id="cat-card-container">
+                    <!-- Card -->
+                    <div class="card">
+
+                        <!-- Card image -->
+                        <img id="cat-image" class="card-img-top" src="" alt="cat">
+
+                        <!-- Card content -->
+                        <div class="card-body text-center">
+
+                            <!-- Title -->
+                            <h4 class="card-title">Twój losowy kot</h4>
+                            <!-- Text -->
+                            <p class="card-text">Aby wylosować kolejnego kota wciśnij poniższy przycisk. Miłego dnia!
+                            </p>
+                            <!-- Button -->
+                            <a id="cat-button" href="#" class="btn btn-primary">Wylosuj kota</a>
+
+                        </div>
+
+                    </div>
+                    <!-- Card -->
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

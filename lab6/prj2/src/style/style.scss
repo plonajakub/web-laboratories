@@ -1,11 +1,14 @@
 @import "custom";
 @import "~bootstrap/scss/bootstrap";
 
-$font-stack: Helvetica, sans-serif;
+#cat-card-container {
+    margin-top: 1%;
+}
 
-body {
-    font-family: $font-stack;
-    font-size: 12pt;
-    width: 100%;
-    background-color: darkorchid;
+#cat-image {
+    max-height: 600px;
+}
+
+#admin-card {
+    margin-top: 10%;
 }
